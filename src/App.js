@@ -16,14 +16,40 @@ let selectedWord = words[Math.floor(Math.random() * words.length)]
 let playable = true
 
 
-const correctLetters = []
-const wrongLetters = []
 
 function App() {
 
   const [playable, setPlayable] = useState(true)
-  const [correctLetters, setCorrectLetters] = useState([])
-  const [wrongLetters, setWrongLetters] = useState([])
+  const [correctLetters, setCorrectLetters] = useState(['a'])
+  const [wrongLetters, setWrongLetters] = useState(['b'])
+
+
+  useEffect(() => {
+    const handleKeyDown = event => {
+      const { key, keyCode } = event
+      if (playable) {
+        if (keyCode >= 65 && keyCode <= 90) {
+          const letter = key.toLowerCase()
+          if (selectedWord.includes(letter)) {
+            if (!(correctLetters.includes(letter)))
+              setCorrectLetters(correctLetters => [...correctLetters, letter]);
+            else {
+            }
+          } else {
+            if (!wrongLetters.includes(letter)) {
+              setWrongLetters(wrongLetters => [...wrongLetters, letter]);
+            }
+            else {
+
+            }
+          }
+        }
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+
+  }, [playable, correctLetters, wrongLetters])
 
   return (
     <>
