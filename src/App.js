@@ -20,8 +20,8 @@ let playable = true
 function App() {
 
   const [playable, setPlayable] = useState(true)
-  const [correctLetters, setCorrectLetters] = useState(['a'])
-  const [wrongLetters, setWrongLetters] = useState(['b'])
+  const [correctLetters, setCorrectLetters] = useState([])
+  const [wrongLetters, setWrongLetters] = useState([])
 
 
   useEffect(() => {
@@ -55,7 +55,7 @@ function App() {
     <>
       <Header />
       <div className="game-container">
-        <Figure />
+        <Figure wrongLetters={wrongLetters} />
         <WrongLetters wrongLetters={wrongLetters} />
         <Word selectedWord={selectedWord} correctLetters={correctLetters} />
       </div>
